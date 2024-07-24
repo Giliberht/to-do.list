@@ -42,7 +42,6 @@
                 {{ firstCharUpper(task.status) }}
               </span>
             </td>
-            -->
             <td>
               <div
                 class="text-center pointer edit-icon"

@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <HomeTask></HomeTask>
+    <HomeTask />
   </div>
 </template>
 
 <script>
-import HomeTask from "./components/HomeTask.vue";
+import HomeTask from './components/HomeTask.vue';
 
 export default {
-  name: "Todo List APP",
+  name: 'TodoListApp',
   components: {
     HomeTask,
   },

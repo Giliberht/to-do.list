@@ -3,12 +3,13 @@
     <h2 class="titleApp">Ma To-do List</h2>
     <div class="input-group mt-4">
       <input
+        id="task"
         v-model="task"
         type="text"
         class="form-control"
         placeholder="Nouvelle tâche"
       />
-      <button class="btn btn-primary w-80" @click="submitTask">
+      <button type="button" class="btn btn-primary w-80" @click="submitTask">
         <font-awesome-icon icon="plus" class="icon" /> Ajouter
       </button>
     </div>
@@ -23,37 +24,46 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(task, index) in tasks" :key="index">
+          <tr v-for="(taskItem, index) in tasks" :key="index">
             <td>
-              <span :class="{ finished: task.status === 'terminée' }">
-                {{ task.name }}
+              <span :class="{ finished: taskItem.status === 'terminée' }">
+                {{ taskItem.name }}
               </span>
             </td>
             <td>
               <span
+                role="button"
+                tabindex="0"
                 @click="changeStatus(index)"
+                @keydown.enter="changeStatus(index)"
                 class="pointer"
                 :class="{
-                  'text-danger': task.status === 'à faire',
-                  'text-warning': task.status === 'en cours',
-                  'text-success': task.status === 'terminée',
+                  'text-danger': taskItem.status === 'à faire',
+                  'text-warning': taskItem.status === 'en cours',
+                  'text-success': taskItem.status === 'terminée',
                 }"
               >
-                {{ firstCharUpper(task.status) }}
+                {{ firstCharUpper(taskItem.status) }}
               </span>
             </td>
             <td>
               <div
+                role="button"
+                tabindex="0"
                 class="text-center pointer edit-icon"
                 @click="editTask(index)"
+                @keydown.enter="editTask(index)"
               >
                 <font-awesome-icon icon="pen" class="icon" />
               </div>
             </td>
             <td>
               <div
+                role="button"
+                tabindex="0"
                 class="text-center pointer delete-icon"
                 @click="deleteTask(index)"
+                @keydown.enter="deleteTask(index)"
               >
                 <font-awesome-icon icon="trash" class="icon" />
               </div>
@@ -67,20 +77,20 @@
 
 <script>
 export default {
-  name: "TodoApp",
+  name: 'HomeTask',
   data() {
     return {
-      task: "",
+      task: '',
       editedTask: null,
-      avaibleStatuses: ["à faire", "en cours", "terminée"],
+      avaibleStatuses: ['à faire', 'en cours', 'terminée'],
       tasks: [
         {
-          name: "SécuQuizz application mobile et web.",
-          status: "à faire",
+          name: 'SécuQuizz application mobile et web.',
+          status: 'à faire',
         },
         {
-          name: "Site graphiste.",
-          status: "en cours",
+          name: 'Site graphiste.',
+          status: 'en cours',
         },
       ],
     };
@@ -92,13 +102,13 @@ export default {
       if (this.editedTask === null) {
         this.tasks.push({
           name: this.task.trim(),
-          status: "à faire",
+          status: 'à faire',
         });
       } else {
         this.tasks[this.editedTask].name = this.task.trim();
         this.editedTask = null;
       }
-      this.task = "";
+      this.task = '';
     },
     deleteTask(index) {
       this.tasks.splice(index, 1);

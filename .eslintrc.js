@@ -1,14 +1,22 @@
 module.exports = {
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ["@babel/preset-react"], // Modifiez selon les besoins de votre projet
-    },
+  root: true,
+  env: {
+    node: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended", // Ajoutez cette ligne si vous utilisez React
+    'plugin:vue/vue3-recommended',
+    'eslint:recommended',
+    '@vue/eslint-config-airbnb',
   ],
-  // Ajoutez d'autres configurations ESLint ici
+  parserOptions: {
+    parser: '@babel/eslint-parser',
+  },
+  rules: {
+    'no-console': 'warn',
+    'no-debugger': 'warn',
+    quotes: ['error', 'single'], // Utiliser des guillemets simples
+    'linebreak-style': ['error', 'unix'], // Enforcer LF line endings
+    'no-plusplus': 'off', // Désactiver la règle pour l'opérateur ++
+    'vuejs-accessibility/click-events-have-key-events': 'off', // Désactiver la règle pour les événements de clic
+  },
 };
